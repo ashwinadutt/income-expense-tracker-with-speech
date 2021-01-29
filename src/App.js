@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Grid } from '@material-ui/core'
 
 import Main from './components/Main/Main'
 import Details from './components/Details/Details'
 import useStyles from './styles'
+import { ExpenseTrackerContext } from './context/context'
 
 const App = () => {
     const classes = useStyles();
+    const {appName} = useContext(ExpenseTrackerContext)
 
     return (
         <div>
