@@ -8,7 +8,7 @@ const contextReducer = (state, action) => {
         case ACTION.ADD_TRANSACTION:
             return [action.payload, ...state];
         case ACTION.DELETE_TRANSACTION:
-            return state.filter(t => t.id !== id);
+            return state.filter(t => t.id !== action.payload);
         default:
             return state;
     }
