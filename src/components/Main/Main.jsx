@@ -21,7 +21,7 @@ const { balance }  = useContext(ExpenseTrackerContext);
                     <Typography variant="subtitle1" style={{lineHeight: '1.5em', marginTop: '20px' }}>
                         Try saying: <br/>Add income for $100 in category salary for next Monday
                     </Typography>
-                    <Divider />
+                    <Divider className={classes.divider}/>
                     <Form />
                 </CardContent>
                 <CardContent className={classes.CardContent}>
@@ -32,7 +32,9 @@ const { balance }  = useContext(ExpenseTrackerContext);
                     </Grid>
                 </CardContent>
             </Card>
-            <div className="status">{speechState}</div>
+           
+
+            {/* <div className="status">{speechState}</div>
       {segment ? (
         <div className="segment">
           {segment.words.map((w) => w.value).join(" ")}
@@ -40,7 +42,7 @@ const { balance }  = useContext(ExpenseTrackerContext);
       ) : null}
       <div className="mic-button">
         <button onClick={toggleRecording}>Record</button>
-      </div>
+      </div> */}
         </>
     )
 }
