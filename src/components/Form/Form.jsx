@@ -7,6 +7,7 @@ import useStyles from './styles'
 import { ExpenseTrackerContext } from '../../context/context'
 import { incomeCategories, expenseCategories } from '../../constants/categories'
 import formatDate from '../../utils/formatDate'
+import CustomSnackbar from '../Snackbar/Snackbar'
 
 const intialState = {
     amount: '',
@@ -18,6 +19,7 @@ const intialState = {
 const Form = () => {
     const classes = useStyles();
     const [formData, setFormData] = useState(intialState);
+    const [open, setOpen] = useState(false);
     const {addTransaction} = useContext(ExpenseTrackerContext);
     const categoryExpenses = formData.type === 'Income' ? incomeCategories : expenseCategories;
     const { segment } = useSpeechContext();
@@ -61,20 +63,27 @@ const Form = () => {
             });
 
             //if all formdate presetn create transaction
-            if(formData.amount && formData.category && formData.type && formData.date)
+            if(segment.isFinal && formData.amount && formData.category && formData.type && formData.date)
                 createTransaction();
         }
     }, [segment]);
 
     const createTransaction = () => {
+    //validation
+        if(!formData.amount.trim() || !formData.category) return;
+
+        if(Number.isNaN(Number(formData.amount) || !formData.date.includes('-'))) return;
+
         const transaction = { ...formData, amount: Number(formData.amount), id: uuidv4()}
         
         addTransaction(transaction);
+        setOpen(true);
         setFormData(intialState);
     }
         
     return (
         <Grid container spacing={2}>
+            <CustomSnackbar open={open} setOpen={setOpen}/>
             <Grid item xs={12}>
                 <Typography align="center" variant="subtitle2" gutterBottom>
                     { segment ? segment.words.map(w => w.value).join(' ') : null}
@@ -103,7 +112,7 @@ const Form = () => {
             <Grid item xs={6}>
                 <TextField fullWidth type="date" label="Date" value={formData.date} onChange={e => setFormData({...formData, date: formatDate(e.target.value)})} />
             </Grid>
-            <Button fullWidth className={classes.button} variant="outlined" color="primary" onClick={createTransaction}>Create</Button>
+            <Button fullWidth className={classes.button} variant="outlined" color="primary" onClick={createTransaction}>Add Transaction</Button>
         </Grid>
     )
 }

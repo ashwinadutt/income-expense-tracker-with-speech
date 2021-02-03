@@ -6,7 +6,7 @@ export default makeStyles((theme) => ({
       display: 'none',
     },
   },
-  mobile: {
+  hideOnMobile: {
     [theme.breakpoints.down('sm')]: {
       display: 'none',
     },

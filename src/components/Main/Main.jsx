@@ -1,9 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Card, CardHeader, CardContent, Typography, Grid, Divider } from '@material-ui/core'
 import { useSpeechContext } from '@speechly/react-client'
 
-
-
+import { ExpenseTrackerContext } from '../../context/context'
 import Form from '../Form/Form'
 import List from '../List/List'
 import useStyles from './styles'
@@ -11,15 +10,16 @@ import useStyles from './styles'
 const Main = () => {
 const classes = useStyles();
 const { speechState, segment, toggleRecording } = useSpeechContext();
+const { balance }  = useContext(ExpenseTrackerContext);
 
     return (
         <>
         <Card className={classes.root}>
                 <CardHeader title="Expense Tracker" subheader="with voice input support" />
                 <CardContent>
-                    <Typography align="center" variant="h5" >Total Balance $100</Typography>
+                    <Typography align="center" variant="h5" className={balance >= 0 ? classes.surplus : classes.deficit} >Total Balance: ${balance}</Typography>
                     <Typography variant="subtitle1" style={{lineHeight: '1.5em', marginTop: '20px' }}>
-                        Try saying: Add income for $100 in catergory salary for Monday
+                        Try saying: <br/>Add income for $100 in category salary for next Monday
                     </Typography>
                     <Divider />
                     <Form />
