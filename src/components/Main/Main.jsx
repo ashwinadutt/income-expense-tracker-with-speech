@@ -19,7 +19,7 @@ const { balance }  = useContext(ExpenseTrackerContext);
                 <CardContent>
                     <Typography align="center" variant="h5" className={balance >= 0 ? classes.surplus : classes.deficit} >Total Balance: ${balance}</Typography>
                     <Typography variant="subtitle1" style={{lineHeight: '1.5em', marginTop: '20px' }}>
-                        Try saying: <br/>Add income for $100 in category salary for next Monday
+                        <b>Try saying:</b> <br/>Add income for $100 in category salary for next Monday
                     </Typography>
                     <Divider className={classes.divider}/>
                     <Form />

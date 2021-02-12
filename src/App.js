@@ -24,8 +24,8 @@ const App = () => {
     }, [speechState]);
 
     return (
-        <div>
-            <Grid container className={classes.grid}  spacing={0} alignItems="center" justify="center" style={{height: '100vh'}}>
+        <div style={{verticalAlign: 'center'}}>
+            <Grid container className={classes.grid}  spacing={0} alignItems="center" justify="center"  style={{height: '100vh'}}>
                 <Grid item xs={12} sm={4} className={classes.hideOnMobile}>
                     <Details title='Income' />
                 </Grid>
